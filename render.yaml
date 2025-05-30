@@ -62,8 +62,8 @@ databases:
   - name: suna-postgres
     databaseName: suna
     user: suna_user
-    plan: starter
+    plan: free  # Updated from 'starter' to 'free'
 
   # Redis Cache
   - name: suna-redis
-    plan: starter
+    plan: free  # Updated from 'starter' to 'free'

@@ -1,5 +1,4 @@
 services:
-  # Backend API Service
   - type: web
     name: suna-backend
     env: python
@@ -20,7 +19,6 @@ services:
           property: connectionString
     healthCheckPath: /health
 
-  # Frontend Service
   - type: web
     name: suna-frontend
     env: node
@@ -37,33 +35,11 @@ services:
           name: suna-backend
           property: host
 
-  # Background Worker (optional)
-  - type: worker
-    name: suna-worker
-    env: python
-    region: oregon
-    plan: starter
-    buildCommand: cd backend && pip install -r requirements.txt
-    startCommand: cd backend && python worker.py
-    envVars:
-      - key: PYTHON_VERSION
-        value: 3.11.0
-      - key: DATABASE_URL
-        fromDatabase:
-          name: suna-postgres
-          property: connectionString
-      - key: REDIS_URL
-        fromDatabase:
-          name: suna-redis
-          property: connectionString
-
 databases:
-  # PostgreSQL Database
   - name: suna-postgres
     databaseName: suna
     user: suna_user
-    plan: free  # Updated from 'starter' to 'free'
+    plan: free
 
-  # Redis Cache
   - name: suna-redis
-    plan: free  # Updated from 'starter' to 'free'
+    plan: free
